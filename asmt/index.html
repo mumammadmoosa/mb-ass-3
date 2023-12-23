@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Phone Search</title>
+    <link rel="stylesheet" href="custom.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mobile Phone Search</h1>
+
+    <label for="searchBy">Search By:</label>
+    <select id="searchBy">
+        <option value="model">Model</option>
+        <option value="company">Company</option>
+        <option value="price">Price</option>
+        <option value="camera">Camera</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <label for="searchValue">Enter Value:</label>
+    <input type="text" id="searchValue">
+
+    <button onclick="searchMobilePhones()">Search</button>
+
+    <div id="result">
+        <!-- Display filtered results here -->
+    </div>
+
+    <script>
+        // Sample data for demonstration
+       
+
+        const mobilePhones  = [
+    {
+        brand: "Samsung",
+        model: "SamsungA30",
+        price: "40000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+    },
+    {
+        brand: "Samsung",
+        model: "SamsungA10",
+        price: "40000",
+        camera: "40px",
+        ram: "4gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Samsung",
+        model: "SamsungA20",
+        price: "40000",
+        camera: "40px",
+        ram: "4gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Vivo",
+        model: "VivoY20",
+        price: "20000",
+        camera: "40px",
+        ram: "2gb",
+        rom : "32gb",
+        
+    },
+    {
+        brand: "Vivo",
+        model: "VivoY11",
+        price: "20000",
+        camera: "40px",
+        ram: "3gb",
+        rom : "32gb",
+        
+    },
+    {
+        brand: "Vivo",
+        model: "VivoY15",
+        price: "30000",
+        camera: "40px",
+        ram: "4gb",
+        rom : "64gb",
+        
+    },
+    {
+        brand: "Motorola",
+        model: "Motorola123",
+        price: "5000",
+        camera: "2px",
+        ram: "2gb",
+        rom : "32gb",
+        
+    },
+    {
+        brand: "Iphone",
+        model: "Iphone12",
+        price: "300000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Iphone",
+        model: "Iphone13",
+        price: "300000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+        
+    },
+    {
+        brand: "Iphone",
+        model: "IphoneX",
+        price: "300000",
+        camera: "40px",
+        ram: "8gb",
+        rom : "128gb",
+        
+    },
+]
+
+        function searchMobilePhones() {
+            const searchBy = document.getElementById("searchBy").value;
+            const searchValue = document.getElementById("searchValue").value.toLowerCase();
+
+            const filteredPhones = mobilePhones.filter(phone => {
+                const phoneValue = phone[searchBy].toString().toLowerCase();
+                return phoneValue.includes(searchValue);
+            });
+
+            displayResults(filteredPhones);
+        }
+
+        function displayResults(phones) {
+            const resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = ""; // Clear previous results
+
+            if (phones.length === 0) {
+                resultContainer.innerHTML = "<p>No matching phones found.</p>";
+                return;
+            }
+
+            const ul = document.createElement("ul");
+            phones.forEach(phone => {
+                const li = document.createElement("li");
+                li.textContent = `${phone.model} - ${phone.company} - $${phone.price} - ${phone.camera}MP`;
+                ul.appendChild(li);
+            });
+
+            resultContainer.appendChild(ul);
+        }
+    </script>
+
+</body>
+</html>
